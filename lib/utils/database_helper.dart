@@ -88,12 +88,12 @@ class DatabaseHelper {
     return response;
   }
 
-  //Get Users
+  //Get All Users
   Future<List> getAllUsers() async {
     var dbClient = await db; //Selecting Database named "db"
     var result = await dbClient.rawQuery("SELECT * FROM $tableUser");
 
-    return result.toList();
+    return result.toList(); // Converting result to List because "rawQuery" returns List
   }
 
   Future<int> getCount() async {
@@ -105,7 +105,7 @@ class DatabaseHelper {
     var dbClient = await db;
     var result = await dbClient.rawQuery(
         "SELECT * FROM $tableUser WHERE $columnId = $id");
-    print("Result = $result");
+//    print("Result = $result");
     if (result.length == 0) {
       return null;
 
@@ -119,8 +119,11 @@ class DatabaseHelper {
   // Delete User
   Future<int> deleteUser(int id) async {
     var dbClient = await db;
-    return await dbClient.delete(
+    var userDeleted = await dbClient.delete(
         tableUser, where: "$columnId = ?", whereArgs: [id]);
+
+    if(userDeleted==0) return null;
+    else return userDeleted;
   }
 
   // Update User

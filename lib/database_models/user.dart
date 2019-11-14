@@ -8,17 +8,17 @@ class User{
 
   User.map(dynamic obj){
     this._id = obj['id'];
-    this._userName = obj['username'];
+    this._userName = obj['userName'];
     this._password = obj['password'];
   }
 
   int get id => _id;
-  String get username => _userName;
+  String get userName => _userName;
   String get password => _password;
 
   Map<String,dynamic> toMap(){
     var map = Map<String,dynamic>();    // key : value(String = key,dynamic = value)
-    map["username"] = _userName;
+    map["userName"] = _userName;
     map["password"] = _password;
 
     if(id!=null){
@@ -30,7 +30,7 @@ class User{
 
   User.fromMap(Map<String, dynamic> map){
     this._id = map["id"];
-    this._userName = map["username"];
+    this._userName = map["userName"];
     this._password = map["password"];
   }
 
